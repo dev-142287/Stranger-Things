@@ -1,0 +1,373 @@
+/* Google font applied in HTML: Montserrat */
+
+/* Base body */
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* Selection color */
+p::selection,
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
+h6::selection,
+div::selection {
+  color: #ff2c2c;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 15, 15, 1);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(30, 30, 30, 1);
+  border-radius: 30px 0 0 30px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+
+/* Logo styles */
+.logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.logo {
+  width: 90%;
+  max-width: 400px;
+  height: auto;
+  z-index: -11;
+}
+
+@media (min-width: 768px) { .logo { width: 70%; } }
+@media (min-width: 992px) { .logo { width: 50%; } }
+
+/* Container for dropdowns */
+.container {
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 20px;
+}
+
+/* Dropdown base styles */
+.dropdown {
+  background: rgba(30, 30, 30, 0.6);
+  border-radius: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1); /* subtle neutral border */
+  box-shadow: 0 0 12px rgba(255,255,255,0.05); /* subtle glow */
+  transition: all 0.3s ease;
+}
+
+/* Dropdown header */
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dropdown-header .title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 1.5px #ff2c2c; /* flicker effect on open only */
+}
+
+/* Arrow SVG */
+.arrow {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+  stroke: #fff;
+  transition: transform 0.3s ease;
+}
+
+.dropdown.open .arrow {
+  transform: rotate(90deg);
+}
+
+/* Dropdown window */
+.dropdown-window {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(20,20,20,0.5);
+  border-top: 1px solid rgba(255,255,255,0.1); /* subtle top border */
+}
+
+.dropdown-content {
+  padding: 16px 20px;
+  color: white;
+}
+
+/* Episode rows */
+.episode-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.episode-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: rgba(40,40,40,0.5);
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.episode-row:hover {
+  background: rgba(255,255,255,0.08); /* subtle hover effect */
+  transform: translateX(2px);
+}
+
+.episode-title { color: #fff; font-size: 15px; }
+.episode-runtime { color: grey; font-size: 14px; }
+
+/* Flicker animation for open dropdown headers */
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 22%, 24%, 55% { opacity: 0.4; }
+}
+
+.dropdown.open .dropdown-header {
+  animation: flicker 0.2s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dropdown-header .title { font-size: 1rem; }
+  .episode-title { font-size: 14px; }
+  .episode-runtime { font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  .dropdown-header .title { font-size: 0.95rem; }
+  .episode-title { font-size: 13px; }
+  .episode-runtime { font-size: 12px; }
+}
+
+/* Background particles */
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 3px;
+  height: 3px;
+  animation: floatParticle linear infinite;
+  opacity: 0;
+}
+
+@keyframes floatParticle {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+}
+
+/* Subtle lightning flashes */
+.lightning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: rgba(255,255,255,0.03);
+  animation: lightning 5s infinite;
+  z-index: 0;
+}
+
+@keyframes lightning {
+  0%, 98%, 100% { opacity: 0; }
+  99% { opacity: 0.1; }
+}
+
+/* Upside Down Neon Fog / Mist Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(50,50,70,0.1) 0%, rgba(0,0,0,0.8) 100%);
+  mix-blend-mode: lighten;
+  opacity: 0.6;
+  animation: mistShift 20s infinite alternate;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(45deg, rgba(100,0,150,0.05), rgba(0,50,200,0.05), rgba(150,0,100,0.05));
+  mix-blend-mode: screen;
+  opacity: 0.4;
+  animation: mistFlow 25s infinite linear;
+}
+
+@keyframes mistShift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -10px) scale(1.02); }
+  100% { transform: translate(-15px, 15px) scale(1); }
+}
+
+@keyframes mistFlow {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-50px, 50px) rotate(360deg); }
+}
+
+/* Upside Down Floating Neon Particles */
+#upsidedown-flares {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.flare {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(200, 100, 255, 0.4);
+  border-radius: 50%;
+  opacity: 0;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 0.6; }
+  50% { opacity: 0.8; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-10vh) translateX(20px) scale(1.2); opacity: 0; }
+}
+
+/* -------------------- Realistic Upside Down Clouds -------------------- */
+#upsidedown-clouds {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Individual cloud style: blurred, semi-transparent, multiple layers */
+.cloud {
+  position: absolute;
+  background: rgba(30, 30, 50, 0.15);
+  border-radius: 50%;
+  filter: blur(30px);
+  opacity: 0.2;
+  animation: cloudDrift linear infinite;
+}
+
+/* Drift animation */
+@keyframes cloudDrift {
+  0% { transform: translateX(-300px) translateY(0) scale(1); }
+  100% { transform: translateX(110vw) translateY(20px) scale(1.1); }
+}
+
+/* Realistic Upside Down Lightning */
+.realistic-lightning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -10;
+  mix-blend-mode: screen;
+}
+
+.realistic-lightning path {
+  stroke: red;
+  stroke-width: 2;
+  fill: none;
+  filter: drop-shadow(0 0 15px red) drop-shadow(0 0 30px rgba(255,50,50,0.5));
+  opacity: 0.8;
+}
+
+
+.lightning::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: red;
+  clip-path: polygon(
+    50% 0%, 52% 5%, 48% 10%, 51% 15%, 49% 20%, 
+    52% 25%, 48% 30%, 51% 35%, 49% 40%, 50% 45%, 
+    52% 50%, 48% 55%, 51% 60%, 49% 65%, 50% 70%, 
+    50% 100%
+  );
+  opacity: 0.6;
+}
+
+/* Lightning fade animation */
+@keyframes lightningFlash {
+  0% { opacity: 1; transform: scaleX(1); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: scaleX(1.1); }
+}
+
+
